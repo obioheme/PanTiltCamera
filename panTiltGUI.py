@@ -14,24 +14,26 @@ window.geometry("%dx%d" % (win_width, win_height))
 left_Frame = Frame(window, width=win_width*0.75, height=win_height, bg="#5C6B9C")
 left_Frame.pack(side=LEFT)
 
-LF_title = Label(left_Frame, text="Camera Visuals", bg="#FFC000")
-LF_title.grid(row=0, column=0, columnspan=4, rowspan=1)
-
 cam = Label(left_Frame)
 cam.grid(row=1, column=0)
 cap = cv2.VideoCapture(0)
 
 
 def show_video():
-    #get latest frame and convert to image
-    cv2image = cv2.cvtColor(cap.read()[1],cv2.COLOR_BGR2RGB)
-    img =Image.fromarray(cv2image)
-    #convert image to PhotoImage
-    imgtk = ImageTk.PhotoImage(image = img)
-    cam.imgtk = imgtk
-    cam.configure(image=imgtk)
-    #re[eat after an interval to capture continuously
-    cam.after(20, show_video)
+    ret, frame = cap.read()
+    if not ret:
+        no_cam = Label(left_Frame, text="Camera not plugged in. Please insert camera!", bg="#5C6B9C", font=("Arial", 20))
+        no_cam.grid(row=0, column=0, columnspan=4, rowspan=1)
+    else:
+        #get latest frame and convert to image
+        cv2image = cv2.cvtColor(cap.read()[1],cv2.COLOR_BGR2RGB)
+        img =Image.fromarray(cv2image)
+        #convert image to PhotoImage
+        imgtk = ImageTk.PhotoImage(image = img)
+        cam.imgtk = imgtk
+        cam.configure(image=imgtk)
+        #re[eat after an interval to capture continuously
+        cam.after(20, show_video)
 
 
 #RIGHT FRAME
