@@ -24,6 +24,7 @@ def show_video():
     if not ret:
         no_cam = Label(left_Frame, text="Camera not plugged in. Please insert camera!", bg="#5C6B9C", font=("Arial", 20))
         no_cam.grid(row=0, column=0, columnspan=4, rowspan=1)
+        
     else:
         #get latest frame and convert to image
         cv2image = cv2.cvtColor(cap.read()[1],cv2.COLOR_BGR2RGB)
