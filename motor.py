@@ -1,6 +1,5 @@
-#import RPi.GPIO as GPIO
-#from RPiMotorLib import RPiMotorLib
-#import time
+import RPi.GPIO as GPIO
+import time
 
 #Azimuth Motor Control Pins
 A_out1 = 15
